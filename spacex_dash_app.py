@@ -45,6 +45,12 @@ app.layout = html.Div(children=[html.H1('SpaceX Launch Records Dashboard',
                                                 min = 0,
                                                 max = 10000,
                                                 step = 1000,
+                                                marks={0: '0', 
+                                                        2000: '2,000', 
+                                                        4000: '4,000', 
+                                                        6000: '6,000', 
+                                                        8000: '8,000', 
+                                                        10000: '10,000'},
                                                 value = [min_payload, max_payload]
                                                 ),
 
@@ -82,6 +88,7 @@ def get_pie_chart(entered_site):
              [Input(component_id='site-dropdown', component_property='value'),
               Input(component_id='payload_slider', component_property='value')])
 def get_scatter_chart(selected_site, slider_values):
+    print(slider_values)
     low, high = slider_values
     scatter_df = spacex_df[spacex_df['Payload Mass (kg)'].between(low,high)]
     if selected_site == 'ALL':
